@@ -27,8 +27,23 @@ class Customer:
         value = (name,address,salary)
         mycursor.execute(qury,value)
         myDatabase.commit()
+    
+    def updateCustomer(myDatabase):
+        myCursor = myDatabase.cursor()
 
-    saveCustomer(myConnecion())
+        print('======================================')
+        name = input('Enter Customer Name Want to Update :')
+        address = input('Enter  Cutomer new Address :')
+        salary = input('Enter Customer new Salary :')
+
+        #print(name,address,salary)
+
+        qury = 'update Customer set address = %s , salary = %s where name = %s'
+        value = (address,salary,name)
+        myCursor.execute(qury,value)
+        myDatabase.commit()
+
+    updateCustomer(myConnecion())
 
 
 
