@@ -12,7 +12,19 @@ class Customer:
         #print(db)
 
         return db
-    
+
+    def printMenu():
+        print('======================================================================')
+        #print('||                                                                  ||')
+        print('||    1.Register Customer                     2.Update Customer     ||')
+        print('||    3.Search Customer                       4.Delete Customer     ||')
+        #print('||                                                                  ||')
+        print('======================================================================')
+
+        option = input('Enter Option Number To Continue :')
+
+        return option
+
     def saveCustomer(myDatabase):
         mycursor = myDatabase.cursor()
 
@@ -70,3 +82,18 @@ class Customer:
 
 
 
+    #print("Number :",printMenu())
+
+    option = printMenu()
+
+    if(option == '1'):
+        saveCustomer(myConnecion())
+    elif(option == '2'):
+        updateCustomer(myConnecion())
+    elif(option == '3'):
+        searchCustomer(myConnecion())
+    elif(option == '4'):
+        deleteCustomer(myConnecion())
+    else:
+        print('Entered Wrong Number !')
+        printMenu()
