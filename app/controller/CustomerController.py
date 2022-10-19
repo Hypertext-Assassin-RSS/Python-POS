@@ -43,7 +43,18 @@ class Customer:
         myCursor.execute(qury,value)
         myDatabase.commit()
 
-    updateCustomer(myConnecion())
+    def deleteCustomer(myDatabase):
+        myCursor = myDatabase.cursor()
+
+        print('======================================')
+        name = input('Enter name of the Customer want to Delete :')
+
+        query = 'delete from Customer where name = %s'
+        value = [name]
+        myCursor.execute(query,value)
+        myDatabase.commit()
+
+    
 
 
 
