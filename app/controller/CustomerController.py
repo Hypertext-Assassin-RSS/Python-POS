@@ -54,7 +54,19 @@ class Customer:
         myCursor.execute(query,value)
         myDatabase.commit()
 
-    
+    def searchCustomer(myDatabase):
+        myCusrsor = myDatabase.cursor()
+
+        print('======================================')
+        name = input('Enter Name of the Customer want to search :')
+
+        query = 'select * from customer where name = %s'
+        value = [name]
+        myCusrsor.execute(query,value)
+        myresult = myCusrsor.fetchall()
+        
+        for result in myresult:
+            print(result)
 
 
 
