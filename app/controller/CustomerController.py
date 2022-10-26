@@ -1,45 +1,54 @@
+from distutils.command.install_egg_info import safe_name
 import mysql.connector as connection
+import tkinter as tk
 
-class Customer:  
-    def myConnecion():
-        db = connection.connect(
-            host='127.0.0.1',
-            user='root',
-            password='Rajith1234@',
-            database='python_pos'
-        )
 
-        #print(db)
+class Connection:
+    def makeConnection(self):
+            db = connection.connect(
+                        host='127.0.0.1',
+                        user='root',
+                        password='Rajith1234@',
+                        database='python_pos'
+                    )
 
-        return db
+            mycursor = db.cursor()
+            qury = 'create table if not exists customer(name varchar(50),address varchar(50),salary varchar(50))'
+            mycursor.execute(qury)
 
-    def printMenu():
-        print('======================================================================')
-        #print('||                                                                  ||')
-        print('||    1.Register Customer                     2.Update Customer     ||')
-        print('||    3.Search Customer                       4.Delete Customer     ||')
-        #print('||                                                                  ||')
-        print('======================================================================')
+            return db
 
-        option = input('Enter Option Number To Continue :')
+# class PrintMenue:
+#     print('======================================================================')
+#     # print('||                                                                  ||')
+#     print('||    1.Register Customer                     2.Update Customer     ||')
+#     print('||    3.Search Customer                       4.Delete Customer     ||')
+#     # print('||                                                                  ||')
+#     print('======================================================================')
 
-        return option
+#     option = input('Enter Option Number To Continue :')
 
-    def saveCustomer(myDatabase):
+            # print(db)
+class Customer:
+    def saveCustomer(self,myDatabase,name,address,salary):
         mycursor = myDatabase.cursor()
 
-        print('======================================')
-        name = input('Enter Customer Name :')
-        address = input('Enter Customer Adddress :')
-        salary = input('Enter Customer Salary :')
+        # print('======================================')
+        # name = input('Enter Customer Name :')
+        # address = input('Enter Customer Adddress :')
+        # salary = input('Enter Customer Salary :')
 
-        #print(name,address,salary)
+        # print(name,address,salary)
 
         qury = 'insert into customer(name,address,salary) value (%s,%s,%s)'
         value = (name,address,salary)
         mycursor.execute(qury,value)
         myDatabase.commit()
-    
+
+        print(mycursor.rowcount, "record inserted.")
+
+        print('ok')
+
     def updateCustomer(myDatabase):
         myCursor = myDatabase.cursor()
 
@@ -48,7 +57,7 @@ class Customer:
         address = input('Enter  Cutomer new Address :')
         salary = input('Enter Customer new Salary :')
 
-        #print(name,address,salary)
+        # print(name,address,salary)
 
         qury = 'update Customer set address = %s , salary = %s where name = %s'
         value = (address,salary,name)
@@ -76,24 +85,66 @@ class Customer:
         value = [name]
         myCusrsor.execute(query,value)
         myresult = myCusrsor.fetchall()
-        
+
         for result in myresult:
             print(result)
 
 
 
-    #print("Number :",printMenu())
+    # print("Number :",printMenu())
 
-    option = printMenu()
+    # option = printMenu()
 
-    if(option == '1'):
-        saveCustomer(myConnecion())
-    elif(option == '2'):
-        updateCustomer(myConnecion())
-    elif(option == '3'):
-        searchCustomer(myConnecion())
-    elif(option == '4'):
-        deleteCustomer(myConnecion())
-    else:
-        print('Entered Wrong Number !')
-        printMenu()
+    # if(option == '1'):
+    #     saveCustomer(myConnecion())
+    # elif(option == '2'):
+    #     updateCustomer(myConnecion())
+    # elif(option == '3'):
+    #     searchCustomer(myConnecion())
+    # elif(option == '4'):
+    #     deleteCustomer(myConnecion())
+    # else:
+    #     print('Entered Wrong Number !')
+    #     printMenu()
+class widndow:
+    
+
+    def main():
+            window = tk.Tk()
+        
+            nameLabel = tk.Label(text='name')
+            nameLabel.pack()
+            nameEntry = tk.Entry( width=50)
+            nameEntry.pack()
+
+            addressLabel = tk.Label(text='address')
+            addressLabel.pack()
+            addressEntry = tk.Entry( width=50)
+            addressEntry.pack()
+
+            salaryLabel = tk.Label(text='salary')
+            salaryLabel.pack()
+            salaryEntry = tk.Entry( width=50)
+            salaryEntry.pack()
+
+            def getData():
+                name = nameEntry.get()
+                address =  addressEntry.get()
+                salary = salaryEntry.get()
+                print(name,address,salary)
+
+                myDatabase = Connection().makeConnection()
+                print(myDatabase)
+                customer = Customer()
+                customer.saveCustomer(myDatabase,name,address,salary)
+
+                
+                
+
+            button = tk.Button(text="Save",width=10,height=2,bg="blue",fg="yellow", command=getData)
+
+            button.pack()
+
+            window.mainloop()
+
+    main()
