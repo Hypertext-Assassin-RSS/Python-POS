@@ -77,11 +77,11 @@ class Customer:
 
         print(mycursor.rowcount, "record(s) deleted")
 
-    def searchCustomer(myDatabase):
+    def searchCustomer(self,myDatabase,name):
         myCusrsor = myDatabase.cursor()
 
-        print('======================================')
-        name = input('Enter Name of the Customer want to search :')
+        # print('======================================')
+        # name = input('Enter Name of the Customer want to search :')
 
         query = 'select * from customer where name = %s'
         value = [name]
@@ -89,7 +89,7 @@ class Customer:
         myresult = myCusrsor.fetchall()
 
         for result in myresult:
-            print(result)
+            return result
 
 
 
@@ -114,7 +114,7 @@ class widndow:
     def main():
             window = tk.Tk()
             window.title("Python POS")
-            window.geometry("500x300")
+            window.geometry("600x300")
 
             nameLabel = tk.Label(text='Name    ')
             addressLabel = tk.Label(text='Address  ')
@@ -163,14 +163,34 @@ class widndow:
                 customer = Customer()
                 customer.deleteCustomer(myDatabase,name)
             
+            def search():
+                name = nameEntry.get()
+                print(name)
+
+                myDatabase = Connection().makeConnection()
+                print(myDatabase)
+                customer = Customer().searchCustomer(myDatabase,name)
+                #print(customer)
+                
+                address = customer[1]
+                salary = customer[2]
+
+                addressEntry.delete(0,tk.END)
+                addressEntry.insert(0,customer[1])
+
+                salaryEntry.delete(0,tk.END)
+                salaryEntry.insert(0,customer[2])
+
 
             buttonSave = tk.Button(text="Save", width=10, height=2, bg="blue", fg="yellow", command=save)
             buttonUpdate = tk.Button(text="Update", width=10,height=2, bg="orange", fg="yellow", command=update)
             buttonDelete = tk.Button(text="Delete", width=10,height=2, bg="red", fg="yellow", command=delete)
+            buttonSearch = tk.Button(text="Search", width=10,height=2, bg="red", fg="yellow", command=search)
 
             buttonSave.grid(row = 3, column = 0, pady = 0)
             buttonUpdate.grid(row = 3, column = 1, pady = 0)
             buttonDelete.grid(row = 3, column = 2, pady = 0)
+            buttonSearch.grid(row = 3, column = 3, pady = 0)
 
             window.mainloop()
 
