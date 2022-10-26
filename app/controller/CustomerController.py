@@ -49,20 +49,22 @@ class Customer:
 
         print('ok')
 
-    def updateCustomer(myDatabase):
-        myCursor = myDatabase.cursor()
+    def updateCustomer(self,myDatabase,name,address,salary):
+        mycursor = myDatabase.cursor()
 
-        print('======================================')
-        name = input('Enter Customer Name Want to Update :')
-        address = input('Enter  Cutomer new Address :')
-        salary = input('Enter Customer new Salary :')
+        # print('======================================')
+        # name = input('Enter Customer Name Want to Update :')
+        # address = input('Enter  Cutomer new Address :')
+        # salary = input('Enter Customer new Salary :')
 
         # print(name,address,salary)
 
         qury = 'update Customer set address = %s , salary = %s where name = %s'
         value = (address,salary,name)
-        myCursor.execute(qury,value)
+        mycursor.execute(qury,value)
         myDatabase.commit()
+
+        print(mycursor.rowcount, "record(s) affected")
 
     def deleteCustomer(myDatabase):
         myCursor = myDatabase.cursor()
@@ -127,7 +129,7 @@ class widndow:
             salaryEntry = tk.Entry( width=50)
             salaryEntry.pack()
 
-            def getData():
+            def save():
                 name = nameEntry.get()
                 address =  addressEntry.get()
                 salary = salaryEntry.get()
@@ -138,12 +140,23 @@ class widndow:
                 customer = Customer()
                 customer.saveCustomer(myDatabase,name,address,salary)
 
+            def update():
+                name = nameEntry.get()
+                address =  addressEntry.get()
+                salary = salaryEntry.get()
+                print(name,address,salary)
                 
-                
+                myDatabase = Connection().makeConnection()
+                print(myDatabase)
+                customer = Customer()
+                customer.updateCustomer(myDatabase,name,address,salary)
+            
 
-            button = tk.Button(text="Save",width=10,height=2,bg="blue",fg="yellow", command=getData)
+            buttonSave = tk.Button(text="Save",width=10,height=2,bg="blue",fg="yellow", command=save)
+            buttonSave.pack()
 
-            button.pack()
+            buttonUpdate = tk.Button(text="Update",width=10,height=2,bg="orange",fg="yellow", command=update)
+            buttonUpdate.pack()
 
             window.mainloop()
 
