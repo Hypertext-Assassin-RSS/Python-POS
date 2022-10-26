@@ -66,16 +66,18 @@ class Customer:
 
         print(mycursor.rowcount, "record(s) affected")
 
-    def deleteCustomer(myDatabase):
-        myCursor = myDatabase.cursor()
+    def deleteCustomer(self,myDatabase,name):
+        mycursor = myDatabase.cursor()
 
-        print('======================================')
-        name = input('Enter name of the Customer want to Delete :')
+        # print('======================================')
+        # name = input('Enter name of the Customer want to Delete :')
 
         query = 'delete from Customer where name = %s'
         value = [name]
-        myCursor.execute(query,value)
+        mycursor.execute(query,value)
         myDatabase.commit()
+
+        print(mycursor.rowcount, "record(s) deleted")
 
     def searchCustomer(myDatabase):
         myCusrsor = myDatabase.cursor()
@@ -151,12 +153,24 @@ class widndow:
                 customer = Customer()
                 customer.updateCustomer(myDatabase,name,address,salary)
             
+            def delete():
+                name = nameEntry.get()
+                print(name)
+                
+                myDatabase = Connection().makeConnection()
+                print(myDatabase)
+                customer = Customer()
+                customer.deleteCustomer(myDatabase,name)
+            
 
             buttonSave = tk.Button(text="Save",width=10,height=2,bg="blue",fg="yellow", command=save)
             buttonSave.pack()
 
             buttonUpdate = tk.Button(text="Update",width=10,height=2,bg="orange",fg="yellow", command=update)
             buttonUpdate.pack()
+
+            buttonDelete = tk.Button(text="Delete",width=10,height=2,bg="red",fg="yellow", command=delete)
+            buttonDelete.pack()
 
             window.mainloop()
 
