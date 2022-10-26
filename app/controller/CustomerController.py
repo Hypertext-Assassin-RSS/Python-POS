@@ -17,28 +17,9 @@ class Connection:
             mycursor.execute(qury)
 
             return db
-
-# class PrintMenue:
-#     print('======================================================================')
-#     # print('||                                                                  ||')
-#     print('||    1.Register Customer                     2.Update Customer     ||')
-#     print('||    3.Search Customer                       4.Delete Customer     ||')
-#     # print('||                                                                  ||')
-#     print('======================================================================')
-
-#     option = input('Enter Option Number To Continue :')
-
-            # print(db)
 class Customer:
     def saveCustomer(self,myDatabase,name,address,salary):
         mycursor = myDatabase.cursor()
-
-        # print('======================================')
-        # name = input('Enter Customer Name :')
-        # address = input('Enter Customer Adddress :')
-        # salary = input('Enter Customer Salary :')
-
-        # print(name,address,salary)
 
         qury = 'insert into customer(name,address,salary) value (%s,%s,%s)'
         value = (name,address,salary)
@@ -50,13 +31,6 @@ class Customer:
     def updateCustomer(self,myDatabase,name,address,salary):
         mycursor = myDatabase.cursor()
 
-        # print('======================================')
-        # name = input('Enter Customer Name Want to Update :')
-        # address = input('Enter  Cutomer new Address :')
-        # salary = input('Enter Customer new Salary :')
-
-        # print(name,address,salary)
-
         qury = 'update Customer set address = %s , salary = %s where name = %s'
         value = (address,salary,name)
         mycursor.execute(qury,value)
@@ -66,9 +40,6 @@ class Customer:
 
     def deleteCustomer(self,myDatabase,name):
         mycursor = myDatabase.cursor()
-
-        # print('======================================')
-        # name = input('Enter name of the Customer want to Delete :')
 
         query = 'delete from Customer where name = %s'
         value = [name]
@@ -80,9 +51,6 @@ class Customer:
     def searchCustomer(self,myDatabase,name):
         myCusrsor = myDatabase.cursor()
 
-        # print('======================================')
-        # name = input('Enter Name of the Customer want to search :')
-
         query = 'select * from customer where name = %s'
         value = [name]
         myCusrsor.execute(query,value)
@@ -90,24 +58,6 @@ class Customer:
 
         for result in myresult:
             return result
-
-
-
-    # print("Number :",printMenu())
-
-    # option = printMenu()
-
-    # if(option == '1'):
-    #     saveCustomer(myConnecion())
-    # elif(option == '2'):
-    #     updateCustomer(myConnecion())
-    # elif(option == '3'):
-    #     searchCustomer(myConnecion())
-    # elif(option == '4'):
-    #     deleteCustomer(myConnecion())
-    # else:
-    #     print('Entered Wrong Number !')
-    #     printMenu()
 class widndow:
     
 
