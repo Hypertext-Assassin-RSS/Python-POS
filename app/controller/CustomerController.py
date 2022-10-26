@@ -46,9 +46,7 @@ class Customer:
         myDatabase.commit()
 
         print(mycursor.rowcount, "record inserted.")
-
-        print('ok')
-
+        
     def updateCustomer(self,myDatabase,name,address,salary):
         mycursor = myDatabase.cursor()
 
@@ -115,21 +113,24 @@ class widndow:
 
     def main():
             window = tk.Tk()
-        
-            nameLabel = tk.Label(text='name')
-            nameLabel.pack()
-            nameEntry = tk.Entry( width=50)
-            nameEntry.pack()
+            window.title("Python POS")
+            window.geometry("500x300")
 
-            addressLabel = tk.Label(text='address')
-            addressLabel.pack()
-            addressEntry = tk.Entry( width=50)
-            addressEntry.pack()
+            nameLabel = tk.Label(text='Name    ')
+            addressLabel = tk.Label(text='Address  ')
+            salaryLabel = tk.Label(text='Salary      ')
 
-            salaryLabel = tk.Label(text='salary')
-            salaryLabel.pack()
-            salaryEntry = tk.Entry( width=50)
-            salaryEntry.pack()
+            nameLabel.grid(row=0, column=0, pady=2)
+            addressLabel.grid(row=1, column=0, pady=2)
+            salaryLabel.grid(row=2, column=0, pady=2)
+
+            nameEntry = tk.Entry(width=50)
+            addressEntry = tk.Entry(width=50)
+            salaryEntry = tk.Entry(width=50)
+
+            nameEntry.grid(row=0, column=1, pady=2)
+            addressEntry.grid(row=1, column=1, pady=2)
+            salaryEntry.grid(row=2, column=1, pady=2)
 
             def save():
                 name = nameEntry.get()
@@ -163,14 +164,13 @@ class widndow:
                 customer.deleteCustomer(myDatabase,name)
             
 
-            buttonSave = tk.Button(text="Save",width=10,height=2,bg="blue",fg="yellow", command=save)
-            buttonSave.pack()
+            buttonSave = tk.Button(text="Save", width=10, height=2, bg="blue", fg="yellow", command=save)
+            buttonUpdate = tk.Button(text="Update", width=10,height=2, bg="orange", fg="yellow", command=update)
+            buttonDelete = tk.Button(text="Delete", width=10,height=2, bg="red", fg="yellow", command=delete)
 
-            buttonUpdate = tk.Button(text="Update",width=10,height=2,bg="orange",fg="yellow", command=update)
-            buttonUpdate.pack()
-
-            buttonDelete = tk.Button(text="Delete",width=10,height=2,bg="red",fg="yellow", command=delete)
-            buttonDelete.pack()
+            buttonSave.grid(row = 3, column = 0, pady = 0)
+            buttonUpdate.grid(row = 3, column = 1, pady = 0)
+            buttonDelete.grid(row = 3, column = 2, pady = 0)
 
             window.mainloop()
 
