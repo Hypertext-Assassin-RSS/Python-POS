@@ -114,7 +114,7 @@ class widndow:
     def main():
             window = tk.Tk()
             window.title("Python POS")
-            window.geometry("600x300")
+            window.geometry("400x200")
 
             nameLabel = tk.Label(text='Name    ')
             addressLabel = tk.Label(text='Address  ')
@@ -182,15 +182,15 @@ class widndow:
                 salaryEntry.insert(0,customer[2])
 
 
-            buttonSave = tk.Button(text="Save", width=10, height=2, bg="blue", fg="yellow", command=save)
-            buttonUpdate = tk.Button(text="Update", width=10,height=2, bg="orange", fg="yellow", command=update)
-            buttonDelete = tk.Button(text="Delete", width=10,height=2, bg="red", fg="yellow", command=delete)
-            buttonSearch = tk.Button(text="Search", width=10,height=2, bg="red", fg="yellow", command=search)
+            buttonSave = tk.Button(text="Save", width=20, height=2, bg="blue", fg="yellow", activebackground='white' , command=save)
+            buttonUpdate = tk.Button(text="Update", width=20,height=2, bg="orange", fg="yellow", activebackground='white' , command=update)
+            buttonDelete = tk.Button(text="Delete", width=20,height=2, bg="red", fg="yellow", activebackground='white' , command=delete)
+            buttonSearch = tk.Button(text="Search", width=20,height=2, bg="green", fg="yellow", activebackground='white' , command=search)
 
             buttonSave.grid(row = 3, column = 0, pady = 0)
             buttonUpdate.grid(row = 3, column = 1, pady = 0)
-            buttonDelete.grid(row = 3, column = 2, pady = 0)
-            buttonSearch.grid(row = 3, column = 3, pady = 0)
+            buttonDelete.grid(row = 4, column = 0, pady = 0)
+            buttonSearch.grid(row = 4, column = 1, pady = 0)
 
             window.mainloop()
 
