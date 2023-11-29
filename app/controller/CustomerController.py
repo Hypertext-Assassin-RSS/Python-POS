@@ -4,11 +4,14 @@ import tkinter as tk
 
 
 class Connection:
+    def __init__(self):
+        pass
+
     def makeConnection(self):
             db = connection.connect(
                         host='127.0.0.1',
                         user='root',
-                        password='Rajith1234@',
+                        password='root1234',
                         database='python_pos'
                     )
 
@@ -61,7 +64,7 @@ class Customer:
 class widndow:
     
 
-    def main():
+    def main(self):
             window = tk.Tk()
             window.title("Python POS")
             window.geometry("400x200")
@@ -144,4 +147,4 @@ class widndow:
 
             window.mainloop()
 
-    main()
+    main(self='')
